@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background: linear-gradient(to bottom, white, plum);
   }
   
   #display {
@@ -8,13 +8,13 @@ body {
     border-color: purple;
     text-align: center;
     background-color: plum;
-    color: white;
+    color: black;
   }
   
   #display:hover {
-    border-color: black;
-    background-color: black;
-    color: white;
+    border-color: purple;
+    background-color: white;
+    color: black;
   }
   
   div {
@@ -28,10 +28,10 @@ body {
   
   .boton {
     text-decoration: none;
-    padding: 10px;
+    padding: 50px;
     font-weight: 600;
     font-size: 20px;
-    color: white;
+    color: black;
     background-color: plum;
     border-radius: 6px;
     border: 2px solid purple;
