@@ -1,15 +1,3 @@
-function añadir_dig(calc,dig)
-{
-  if (calc.estado == "init") {
-    calc.gui.display.innerHTML = dig;
-    calc.estado = "OP"
-  } else if (calc.estado == "OP") {
-    calc.gui.display.innerHTML += dig;
-    console.log(calc.op1)
-    console.log(calc.operacion);
-  }
-}
-
 function calcular(calc)
 {
   calc.op2 = calc.gui.display.innerHTML
@@ -25,6 +13,22 @@ function calcular(calc)
   calc.estado = "init"
   calc.operacion = "null"
 }
+
+
+
+function añadir_dig(calc,dig)
+{
+  if (calc.estado == "init") {
+    calc.gui.display.innerHTML = dig;
+    calc.estado = "OP"
+  } else if (calc.estado == "OP") {
+    calc.gui.display.innerHTML += dig;
+    console.log(calc.op1)
+    console.log(calc.operacion);
+  }
+}
+
+
 
 function main () {
 
