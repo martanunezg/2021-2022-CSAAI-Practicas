@@ -15,7 +15,6 @@ function calcular(calc)
 }
 
 
-
 function añadir_dig(calc,dig)
 {
   if (calc.estado == "init") {
@@ -27,8 +26,6 @@ function añadir_dig(calc,dig)
     console.log(calc.operacion);
   }
 }
-
-
 
 function main () {
 
@@ -51,6 +48,7 @@ function main () {
       botondig0: document.getElementById("boton0"),
       botoncoma: document.getElementById("botoncoma"),
       botonac: document.getElementById("botonac"),
+      botondel: document.getElementById("botondel"),
       operacionmas: document.getElementById("operacionmas"),
       operacionmenos: document.getElementById("operacionmenos"),
       operacionpor: document.getElementById("operacionpor"),
@@ -93,25 +91,25 @@ function main () {
   }
   calc.gui.operacionmas.onclick = () => {
     calc.op1 = calc.gui.display.innerHTML;
-    calc.gui.display.innerHTML = 0;
+    calc.gui.display.innerHTML = "+";
     calc.operacion = "suma";
     calc.estado = "init";
   }
   calc.gui.operacionmenos.onclick = () => {
     calc.op1 = calc.gui.display.innerHTML;
-    calc.gui.display.innerHTML = 0;
+    calc.gui.display.innerHTML = "-";
     calc.operacion = "resta";
     calc.estado = "init";
   }
   calc.gui.operacionpor.onclick = () => {
     calc.op1 = calc.gui.display.innerHTML;
-    calc.gui.display.innerHTML = 0;
+    calc.gui.display.innerHTML = "x";
     calc.operacion = "multiplicacion";
     calc.estado = "init";
   }
   calc.gui.operaciondivision.onclick = () => {
     calc.op1 = calc.gui.display.innerHTML;
-    calc.gui.display.innerHTML = 0;
+    calc.gui.display.innerHTML = "/";
     calc.operacion = "division";
     calc.estado = "init";
   }
