@@ -1,0 +1,102 @@
+body {
+    background: linear-gradient(to bottom, white, plum);
+  }
+  
+  #display {
+    border-style: groove;
+    border-width: 10px;
+    border-color: purple;
+    text-align: center;
+    background-color: plum;
+    color: black;
+  }
+  
+  #display:hover {
+    border-color: purple;
+    background-color: white;
+    color: black;
+  }
+  
+  div {
+      text-align: center;
+  }
+  
+  img {
+    height: 20px;
+    margin-left: 0px;
+  }
+  
+  .boton {
+    text-decoration: none;
+    padding: 50px;
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+    background-color: plum;
+    border-radius: 6px;
+    border: 2px solid purple;
+  }
+  .boton:hover {
+    color: purple;
+    background-color: white;
+  }
+  #boton7 {
+    cursor: pointer;
+  }
+  #boton8 {
+    cursor: pointer;
+  }
+  #boton9 {
+    cursor: pointer;
+  }
+  #botonac {
+    cursor: pointer;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  #botondel {
+    cursor: pointer;
+  }
+  #boton4 {
+    cursor: pointer;
+  }
+  #boton5 {
+    cursor: pointer;
+  }
+  #boton6 {
+    cursor: pointer;
+  }
+  #operacionpor {
+    cursor: pointer;
+  }
+  #operaciondivision {
+    cursor: pointer;
+  }
+  #boton1 {
+    cursor: pointer;
+  }
+  #boton2 {
+    cursor: pointer;
+  }
+  #boton3 {
+    cursor: pointer;
+  }
+  #operacionmas {
+    cursor: pointer;
+  }
+  #operacionmenos {
+    cursor: pointer;
+  }
+  #boton0 {
+    cursor: pointer;
+  }
+  #botoncoma {
+    cursor: pointer;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+  #operacionigual {
+    cursor: pointer;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
