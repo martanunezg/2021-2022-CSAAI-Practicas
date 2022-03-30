@@ -15,19 +15,24 @@ let y = 10;
 
 //-- Velocidades del objeto
 let velx = 3;
-let vely = 0.2;
+let vely = 1;
 
 //-- Función principal de animación
 function update() 
 {
   console.log("test");
   //-- Algoritmo de animacion:
-  //-- 1) Actualizar posicion del  elemento
+  //-- 1) Actualizar posición del  elemento
   //-- (física del movimiento rectilineo uniforme)
 
-   //-- Condición de rebote en extremos del canvas
+   //-- Condición de rebote en extremos verticales del canvas
    if (x < 0 || x >= (canvas.width - 20) ) {
     velx = -velx;
+  }
+
+  //-- Condición de rebote en extremos horizontales del canvas
+  if (y <= 0 || y > 80) {
+    vely = -vely;
   }
 
   //-- Actualizar la posición
