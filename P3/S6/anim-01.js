@@ -13,24 +13,26 @@ const ctx = canvas.getContext("2d");
 let x = 0;
 let y = 10;
 
-//-- Velocidad horizontal del objeto
+//-- Velocidades del objeto
 let velx = 3;
+let vely = 0.2;
 
-//-- Funcion principal de animacion
+//-- Función principal de animación
 function update() 
 {
   console.log("test");
   //-- Algoritmo de animacion:
-  //-- 1) Actualizar posición del  elemento
+  //-- 1) Actualizar posicion del  elemento
   //-- (física del movimiento rectilineo uniforme)
 
-   //-- Condicion de rebote en extremos del canvas
+   //-- Condición de rebote en extremos del canvas
    if (x < 0 || x >= (canvas.width - 20) ) {
     velx = -velx;
   }
 
   //-- Actualizar la posición
   x = x + velx;
+  y = y + vely;
 
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
