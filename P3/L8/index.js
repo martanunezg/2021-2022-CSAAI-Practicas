@@ -46,6 +46,20 @@ for (let i = 0; i < LADRILLO.F; i++) {
 let x = 960;
 let y = 950;
 
+let start = 0;
+
+let x1 = 1500;
+let y1 = 40;
+
+let x2 = 1520;
+let y2 = 55;
+
+let x3 = 1585;
+let y3 = 55;
+
+let x4 = 1650;
+let y4 = 55;
+
 let x61 = 80;
 let y61 = 140;
 
@@ -115,6 +129,15 @@ function update()
         ctx.closePath();
       }
     }
+  
+  //-- Texto puntos
+  ctx.beginPath();
+    ctx.strokeStyle = 'lightblue';
+    ctx.font = "70px Arial";
+    ctx.strokeText(start, 400, 80);
+    ctx.stroke();
+    ctx.closePath();
+
 
   for (let i = 0; i < LADRILLO.F; i++) {
     for (let j = 0; j < LADRILLO.C; j++) {
@@ -123,6 +146,9 @@ function update()
       if (ladrillos[i][j].visible) {
         if (x65 > ladrillos[i][j].x && x65 < ladrillos[i][j].x + ladrillos[i][j].w && y65 > ladrillos[i][j].y && y65 < ladrillos[i][j].y + ladrillos[i][j].h) {
           ladrillos[i][j].visible = false;
+          start += 1;
+
+
         }
       }
     }
@@ -130,22 +156,31 @@ function update()
 
 
 
+  //-- Fondo vidas
+  ctx.beginPath();
+    ctx.rect(x1, y1, 200, 60);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.closePath();
+
+  
+  //-- Vidas
+  ctx.beginPath();
+    ctx.rect(x2, y2, 30, 30);
+    ctx.rect(x3, y3, 30, 30);
+    ctx.rect(x4, y4, 30, 30);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+    ctx.closePath();
+
     
   
 
   //-- 3) Dibujar los elementos visibles
   ctx.beginPath();
     
-    //-- Texto puntos
-    ctx.strokeStyle = 'lightblue';
-    ctx.font = "70px Arial";
-    ctx.strokeText("0", 400, 80);
+    
 
-    //-- Texto vidas
-    ctx.strokeStyle = 'red';
-    ctx.font = "70px Arial";
-    ctx.strokeText("3", 1500, 80);
- 
     
     //-- Bola
     ctx.arc(x65, y65, 10, 0, 2 * Math.PI);
@@ -157,13 +192,13 @@ function update()
   
 
     //-- Borde superior
-    ctx.rect(x61, y61, 1750, 40)
+    ctx.rect(x61, y61, 1750, 40);
 
     //-- Borde extremo izquierdo
-    ctx.rect(x62, y62, 30, 1080)
+    ctx.rect(x62, y62, 30, 1080);
 
     //-- Borde extremo derecho
-    ctx.rect(x63, y63, 30, 1080)
+    ctx.rect(x63, y63, 30, 1080);
 
 
     //-- Dibujar
