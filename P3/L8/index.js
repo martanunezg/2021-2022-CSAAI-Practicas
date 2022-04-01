@@ -9,6 +9,8 @@ canvas.height = 1080;
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
 
+const display = document.getElementById("display");
+
 //-- Constantes de los ladrillos
 const LADRILLO = {
   F: 5,  // Filas
@@ -38,6 +40,8 @@ for (let i = 0; i < LADRILLO.F; i++) {
     }
 }
 
+
+
 //-- Posición del elemento a animar
 let x = 960;
 let y = 950;
@@ -62,6 +66,18 @@ let vely = 5;
 
 
 
+window.onkeydown = (e) => {
+  if (e.keyCode == 39) {
+    x += 50;
+  }
+  if (e.keyCode == 37) {
+    x -= 50;
+  }
+}
+
+
+
+
 //-- Función principal de animación
 function update() 
 {
@@ -69,6 +85,7 @@ function update()
   //-- Algoritmo de animación:
   //-- 1) Actualizar posiciones de los elementos
   //-- Por hacer
+
 
   //-- Condicion de rebote en extremos del canvas
   if (x65 < 130 || x65 >= (canvas.width - 140) ) {
@@ -78,7 +95,7 @@ function update()
   if (y65 < 190 || y65 >= (canvas.height) ) {
     vely = -vely;
   }
-
+  
   //-- Actualizar la posición
   x65 = x65 + velx;
   y65 = y65 + vely;
@@ -98,7 +115,23 @@ function update()
         ctx.closePath();
       }
     }
-}
+
+  for (let i = 0; i < LADRILLO.F; i++) {
+    for (let j = 0; j < LADRILLO.C; j++) {
+  
+      //-- Si el ladrillo es visible y está en contacto con la bola, se hace invisible
+      if (ladrillos[i][j].visible) {
+        if (x65 > ladrillos[i][j].x && x65 < ladrillos[i][j].x + ladrillos[i][j].w && y65 > ladrillos[i][j].y && y65 < ladrillos[i][j].y + ladrillos[i][j].h) {
+          ladrillos[i][j].visible = false;
+        }
+      }
+    }
+  }
+
+
+
+    
+  
 
   //-- 3) Dibujar los elementos visibles
   ctx.beginPath();
@@ -120,10 +153,8 @@ function update()
     ctx.lineWidth = 2;
 
     //-- Pala
-    ctx.rect(x, y, 130, 25);
-
-    //-- Ladrillos
-    
+    pala = ctx.rect(x, y, 130, 25);
+  
 
     //-- Borde superior
     ctx.rect(x61, y61, 1750, 40)
@@ -143,11 +174,13 @@ function update()
 
     //-- Dibujar el trazo
     ctx.stroke()
-  ctx.closePath();
+    ctx.closePath();
+  }
 
   //-- 4) Volver a ejecutar update cuando toque
   requestAnimationFrame(update);
 }
+
 
 //-- ¡Que empiece la función!
 update();
