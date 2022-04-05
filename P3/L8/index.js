@@ -23,6 +23,7 @@ const LADRILLO = {
   visible: true
 };
 
+
 //-- Estructura de los ladrillos
 const ladrillos = [];
 
@@ -44,21 +45,13 @@ for (let i = 0; i < LADRILLO.F; i++) {
 
 //-- Posición del elemento a animar
 let x = 960;
-let y = 950;
+let y = 980;
 
 let start = 0;
+let life = 3;
 
 let x1 = 1500;
-let y1 = 40;
-
-let x2 = 1520;
-let y2 = 55;
-
-let x3 = 1585;
-let y3 = 55;
-
-let x4 = 1650;
-let y4 = 55;
+let y1 = 80;
 
 let x61 = 80;
 let y61 = 140;
@@ -75,21 +68,23 @@ let y64 = 10;
 let x65 = 1025;
 let y65 = 940;
 
-let velx = 20;
-let vely = 5;
+let velx = 8;
+let vely = 8;
+
+let palaw = 140;
+let palah = 25;
 
 
 
 window.onkeydown = (e) => {
   if (e.keyCode == 39) {
-    x += 50;
+    x += 100;
   }
   if (e.keyCode == 37) {
-    x -= 50;
+    x -= 100;
   }
+
 }
-
-
 
 
 //-- Función principal de animación
@@ -99,21 +94,35 @@ function update()
   //-- Algoritmo de animación:
   //-- 1) Actualizar posiciones de los elementos
   //-- Por hacer
+  
 
+  
 
-  //-- Condicion de rebote en extremos del canvas
+  //-- Condición de rebote en extremos del canvas
+  
   if (x65 < 130 || x65 >= (canvas.width - 140) ) {
-    velx = -velx;
-  }
-
-  if (y65 < 190 || y65 >= (canvas.height) ) {
-    vely = -vely;
+    velx = -velx;  
   }
   
+  if (y65 < 190 || x65 > x && x65 < x + palaw && y65 > y && y65 < y + palah) {
+   vely = -vely;
+  }
+
+  if (y65 >= canvas.height) {
+    velx = 0;
+    vely = 0;
+    start = 0; 
+  }
+
+
+
   //-- Actualizar la posición
   x65 = x65 + velx;
   y65 = y65 + vely;
+  
+  
 
+  
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -147,7 +156,7 @@ function update()
         if (x65 > ladrillos[i][j].x && x65 < ladrillos[i][j].x + ladrillos[i][j].w && y65 > ladrillos[i][j].y && y65 < ladrillos[i][j].y + ladrillos[i][j].h) {
           ladrillos[i][j].visible = false;
           start += 1;
-
+          
 
         }
       }
@@ -155,25 +164,15 @@ function update()
   }
 
 
-
-  //-- Fondo vidas
-  ctx.beginPath();
-    ctx.rect(x1, y1, 200, 60);
-    ctx.fillStyle = 'white';
-    ctx.fill();
-    ctx.closePath();
-
-  
   //-- Vidas
   ctx.beginPath();
-    ctx.rect(x2, y2, 30, 30);
-    ctx.rect(x3, y3, 30, 30);
-    ctx.rect(x4, y4, 30, 30);
-    ctx.fillStyle = 'red';
-    ctx.fill();
-    ctx.closePath();
+  ctx.strokeStyle = 'red';
+  ctx.font = "70px Arial";
+  ctx.strokeText(life, x1, y1);
+  ctx.stroke();
+  ctx.closePath();
 
-    
+ 
   
 
   //-- 3) Dibujar los elementos visibles
@@ -188,7 +187,7 @@ function update()
     ctx.lineWidth = 2;
 
     //-- Pala
-    pala = ctx.rect(x, y, 130, 25);
+    ctx.rect(x, y, palaw, palah);
   
 
     //-- Borde superior
@@ -213,9 +212,11 @@ function update()
   }
 
   //-- 4) Volver a ejecutar update cuando toque
+
   requestAnimationFrame(update);
 }
 
 
 //-- ¡Que empiece la función!
 update();
+
