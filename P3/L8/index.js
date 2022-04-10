@@ -3,8 +3,8 @@ console.log("Ejecutando JS...");
 const canvas = document.getElementById("canvas");
 
 //-- Definir el tamaño del canvas
-canvas.width = 1920;
-canvas.height = 1080;
+canvas.width = 1920; // Anchura del canvas
+canvas.height = 1080; // Altura del canvas
 
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
@@ -15,12 +15,12 @@ const display = document.getElementById("display");
 const LADRILLO = {
   F: 5,  // Filas
   C: 10,  // Columnas
-  w: 140,
-  h: 35,
-  origen_x: 250,
-  origen_y: 300,
-  padding: 4,
-  visible: true
+  w: 140, // Anchura
+  h: 35, // Altura
+  origen_x: 250, // Posición eje x
+  origen_y: 350, // Posición eje y
+  padding: 4, // Separación entre ladrillos
+  visible: true // Visibilidad
 };
 
 
@@ -43,7 +43,7 @@ for (let i = 0; i < LADRILLO.F; i++) {
 
 
 
-//-- Posición del elemento a animar
+//-- Posiciones de los elementos (eje x, eje y) y constantes
 let x = 960;
 let y = 980;
 
@@ -68,14 +68,14 @@ let y64 = 10;
 let x65 = 1025;
 let y65 = 940;
 
-let velx = 8;
-let vely = 8;
+let velx = 9;
+let vely = 9;
 
 let palaw = 140;
-let palah = 25;
+let palah = 20;
 
 
-
+//-- Pulsar teclas (flechas y barra espaciadora)
 window.onkeydown = (e) => {
   if (e.keyCode == 39) {
     x += 100;
@@ -83,23 +83,22 @@ window.onkeydown = (e) => {
   if (e.keyCode == 37) {
     x -= 100;
   }
+  if (e.keyCode == 32) {
+    update();
+    
+  }
 
 }
+
 
 
 //-- Función principal de animación
 function update() 
 {
   console.log("test");
-  //-- Algoritmo de animación:
-  //-- 1) Actualizar posiciones de los elementos
-  //-- Por hacer
-  
 
-  
-
-  //-- Condición de rebote en extremos del canvas
-  
+  //-- 1) Animaciones
+  //-- Condición de rebote de la bola en los extremos del canvas y en la pala 
   if (x65 < 130 || x65 >= (canvas.width - 140) ) {
     velx = -velx;  
   }
@@ -108,24 +107,37 @@ function update()
    vely = -vely;
   }
 
+  //-- Restar vidas y final del juego
   if (y65 >= canvas.height) {
-    velx = 0;
-    vely = 0;
-    start = 0; 
+    life--;
+    if (!life) {
+      alert("FIN DEL JUEGO");
+      document.location.reload();   
+    }
+
+    else {
+      x65 = 1025;
+      y65 = 940;
+      velx = 8;
+      vely = 8;
+      x = 960;
+      y = 980;
+      
+    }
+    
   }
-
-
 
   //-- Actualizar la posición
   x65 = x65 + velx;
   y65 = y65 + vely;
   
   
-
-  
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+
+  //-- 3) Dibujar los elementos visibles
+  //-- Ladrillos
   for (let i = 0; i < LADRILLO.F; i++) {
     for (let j = 0; j < LADRILLO.C; j++) {
 
@@ -143,7 +155,7 @@ function update()
   ctx.beginPath();
     ctx.strokeStyle = 'lightblue';
     ctx.font = "70px Arial";
-    ctx.strokeText(start, 400, 80);
+    ctx.strokeText("Puntos: " +start, 400, 80);
     ctx.stroke();
     ctx.closePath();
 
@@ -155,8 +167,9 @@ function update()
       if (ladrillos[i][j].visible) {
         if (x65 > ladrillos[i][j].x && x65 < ladrillos[i][j].x + ladrillos[i][j].w && y65 > ladrillos[i][j].y && y65 < ladrillos[i][j].y + ladrillos[i][j].h) {
           ladrillos[i][j].visible = false;
-          start += 1;
-          
+          velx = 6;
+          vely = 6;
+          start += 1; 
 
         }
       }
@@ -164,22 +177,18 @@ function update()
   }
 
 
-  //-- Vidas
+  //-- Texto vidas
   ctx.beginPath();
   ctx.strokeStyle = 'red';
   ctx.font = "70px Arial";
-  ctx.strokeText(life, x1, y1);
+  ctx.strokeText("Vidas: " +life, x1, y1);
   ctx.stroke();
   ctx.closePath();
 
  
   
-
-  //-- 3) Dibujar los elementos visibles
-  ctx.beginPath();
-    
-    
-
+  ctx.beginPath();  
+  
     
     //-- Bola
     ctx.arc(x65, y65, 10, 0, 2 * Math.PI);
@@ -214,9 +223,7 @@ function update()
   //-- 4) Volver a ejecutar update cuando toque
 
   requestAnimationFrame(update);
+
 }
 
-
-//-- ¡Que empiece la función!
-update();
 
