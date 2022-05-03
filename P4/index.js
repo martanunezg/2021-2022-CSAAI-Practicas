@@ -5,17 +5,17 @@ const canvas = document.getElementById('canvas');
 const img = document.getElementById('imagesrc');
 const ctx = canvas.getContext('2d');
 
- //-- Activar y desactivar filtros
- const filtro_colores = true;
- const filtro_grises = false;
+//-- Activar y desactivar filtros
+const filtro_colores = true;
+const filtro_grises = true;
 
- //--Acceso a los botones
- var boton_colores = document.getElementById('boton_colores');
- var boton_grises = document.getElementById('boton_grises');
+//--Acceso a los botones
+const boton_colores = document.getElementById('boton_colores');
+const boton_grises = document.getElementById('boton_grises');
 
- var rojo = document.getElementById('rojo');
- var verde = document.getElementById('verde');
- var azul = document.getElementById('azul');
+const rojo = document.getElementById('rojo');
+const verde = document.getElementById('verde');
+const azul = document.getElementById('azul');
 
 
 
@@ -56,13 +56,13 @@ img.onload = function () {
 
 //-- Mostrar botones
 function mostrarbotones () {
-    deslizadorrojo.style.canvas= '';
+    deslizadorrojo.style.display= 'block';
     range_value_rojo.innerHTML = deslizadorrojo.value;
     rojo.innerHTML = "Establece el umbral de rojo:";
-    deslizadorverde.style.canvas = '';
+    deslizadorverde.style.display = 'block';
     range_value_verde.innerHTML = deslizadorverde.value;
     verde.innerHTML = "Establece el umbral de verde:";
-    deslizadorazul.style.canvas = '';
+    deslizadorazul.style.display= 'block';
     range_value_azul.innerHTML = deslizadorazul.value;
     azul.innerHTML = "Establece el umbral de azul:";
 }
@@ -70,59 +70,43 @@ function mostrarbotones () {
 
   //-- Ocultar botones
 function ocultarbotones() {
-    deslizadorrojo.style.canvas = 'none';
+    deslizadorrojo.style.display = 'none';
     range_value_rojo.innerHTML = '';
     rojo.innerHTML = '';
-    deslizadorverde.style.canvas = 'none';
+    deslizadorverde.style.display = 'none';
     range_value_verde.innerHTML = '';
     verde.innerHTML = '';
-    deslizadorazul.style.canvas = 'none';
+    deslizadorazul.style.display = 'none';
     range_value_azul.innerHTML = '';
     azul.innerHTML = '';
 }
 
-
-  //-- Botón color
+//-- Botón color
 boton_colores.onclick = () => {
-  if (filtro_colores){
-    boton_colores.innerHTML = "Filtro de colores: OFF";
-    filtro_colores= false;
-    ctx.drawImage(img, 0,0);
-    ocultarbotones();
-  } 
-  else {
-    boton_colores.innerHTML = "Filtro de colores: ON";
-    filtro_colores= true;
-    filtro_grises= false;
-    boton_grises.innerHTML = "Filtro de grises: OFF";
-    mostrarbotones();
-   }
+  mostrarbotones();
+  filtro_colores = true;
+  filtro_grises = false;
+  ctx.drawImage(img, 0,0);
+  
 }
 
 
 //-- Botón grises
 boton_grises.onclick = () => {
-  if (filtro_grises){
-    ctx.drawImage(img, 0,0);
-    filtro_grises = false;
-    boton_grises.innerHTML = "Filtro de grises: OFF";
-  } 
-  else {
-    filtro_grises = true;
-    boton_grises.innerHTML = "Filtro de grises: ON";
-    boton_colores.innerHTML = "Filtro de colores: OFF";
-    filtro_colores= false;
-    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    var data = imgData.data
-    for (var i = 0; i < data.length; i+=4) {
-      brillo = (3 * data[i] + 4 * data[i+1] + data[i+2])/8
-      data[i] = brillo;
-      data[i+1] = brillo;
-      data[i+2] = brillo;
-    }
-    ctx.putImageData(imgData, 0, 0);
-    ocultarbotones();
+  ocultarbotones();
+  filtro_colores = false;
+  filtro_grises = true;
+  ctx.drawImage(img, 0,0);
+  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let data = imgData.data
+  for (let i = 0; i < data.length; i+=4) {
+    let brillo = (3 * data[i] + 4 * data[i+1] + data[i+2])/8
+    data[i] = brillo;
+    data[i+1] = brillo;
+    data[i+2] = brillo;
   }
+  ctx.putImageData(imgData, 0, 0);
+    
 }
 
 
