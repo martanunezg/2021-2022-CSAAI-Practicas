@@ -97,13 +97,11 @@ boton_grises.onclick = () => {
   filtro_colores = false;
   filtro_grises = true;
   ctx.drawImage(img, 0,0);
-  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  let data = imgData.data
+  let imgGreyData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let data = imgGreyData.data
   for (let i = 0; i < data.length; i+=4) {
     let brillo = (3 * data[i] + 4 * data[i+1] + data[i+2])/8
-    data[i] = brillo;
-    data[i+1] = brillo;
-    data[i+2] = brillo;
+    data[i] = data[i+1] = data[i+2] = brillo;
   }
   ctx.putImageData(imgData, 0, 0);
     
