@@ -3,3 +3,21 @@ body {
     background-color: white;
 }
 
+p {
+    color: black;
+    margin-left: 20px;
+
+    
+}
+
+#deslizadorrojo {
+    margin-left: 20px;
+}
+
+#deslizadorverde{
+    margin-left: 20px;
+}
+
+#deslizadorazul{
+    margin-left: 20px;
+}

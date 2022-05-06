@@ -81,6 +81,8 @@ function ocultarbotones() {
     azul.innerHTML = '';
 }
 
+ocultarbotones();
+
 //-- Botón color
 boton_colores.onclick = () => {
   mostrarbotones();
